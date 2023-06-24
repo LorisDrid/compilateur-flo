@@ -26,7 +26,6 @@ n_programme* arbre_abstrait;
 
 
 //Ce qu'on a de base
-%token IDENTIFIANT
 %token PLUS
 %token FOIS
 %token PARENTHESE_OUVRANTE
