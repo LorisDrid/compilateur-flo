@@ -63,7 +63,7 @@ n_programme* arbre_abstrait;
 %%
 
 
-// Partie 1 :
+// Instructions
 
 
 prog: listeInstructions {
@@ -82,10 +82,14 @@ instruction: ecrire {
 	$$ =$1;
 }
 
+// Ecrire 
+
 ecrire: ECRIRE PARENTHESE_OUVRANTE expr PARENTHESE_FERMANTE POINT_VIRGULE {
 	
 	$$ =creer_n_ecrire($3);
 }
+
+// Expression
 
 expr: expr PLUS expr{
 	$$ =creer_n_operation('+', $1, $3);
@@ -104,6 +108,8 @@ expr: ENTIER {
 }
 
 
+
+// Erreur
 
 %%
 
