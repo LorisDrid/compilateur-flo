@@ -10,7 +10,6 @@
 %option nounput
 %option noinput
 
-
 entier               ([1-9][0-9]*|0)
 chiffre              [0-9]
 lettre               [a-zA-Z]
@@ -21,13 +20,38 @@ espace               [ \t\r\n]
 "#".*                { /* Ignorer commentaires */  }
 {espace}+            { /* Ignorer espaces */       }
 "+"                  { return PLUS;                }
+"-"                  { return MOINS;               }
 "*"                  { return FOIS;                }
+"/"                  { return DIVISER;             }
+"%"                  { return MODULO;              }
+"="                  { return EGAL;                }
+"!="                 { return DIFFERENT;           }
+"<"                  { return INFERIEUR;           }
+">"                  { return SUPERIEUR;           }
+"<="                 { return INFERIEUR_OU_EGAL;   }
+">="                 { return SUPERIEUR_OU_EGAL;   } 
+"si"                 { return SI;                  }
+"et"                 { return ET;                  }
+"ou"                 { return OU;                  }
+"non"                { return NON;                 }
+"!"                  { return NON;                 }
+"sinon"              { return SINON;               }
+"tantque"            { return TANTQUE;             }
+"booleen"            { yylval.entier=0; return TYPE;  }
+"Vrai"               { return VRAI;                }
+"Faux"               { return FAUX;                }
+"entier"             { yylval.entier=1; return TYPE;  }
+"retourner"          { return RETOURNER;           }
 "("                  { return PARENTHESE_OUVRANTE; }
 ")"                  { return PARENTHESE_FERMANTE; }
+"{"                  { return ACCOLADE_OUVRANTE;   }
+"}"                  { return ACCOLADE_FERMANTE;   }
+"lire"               { return LIRE;                }
 "ecrire"             { return ECRIRE;              }
+","                  { return VIRGULE;             }
 ";"                  { return POINT_VIRGULE;       }
 {entier}             { yylval.entier=atoi(yytext); return ENTIER;}
-{lettre}{alphanum}*  { return IDENTIFIANT;         }
+{lettre}{alphanum}*  { yylval.identifiant=strdup(yytext);  return IDENTIFIANT;}
 <<EOF>>              { return FIN; }  /* Fin de fichier */
 .                    {                                /* Erreur, autre caractètre quelconque */
                        fprintf( stderr, "Ligne %d: caractère invalide: %s\n", yylineno,yytext ); \
@@ -42,10 +66,11 @@ int yywrap(){
  * Fonction auxiliaire qui donne le nom des différents tokens
  ******************************************************************************/
 
-int token_fermes[] = {PLUS,FOIS,PARENTHESE_OUVRANTE,PARENTHESE_FERMANTE,ECRIRE,POINT_VIRGULE};
-char *str_token[] = {"+","*""(",")",";","ECRIRE"};
+int token_fermes[] = {PLUS, MOINS, FOIS, DIVISER, MODULO, EGAL, DIFFERENT, INFERIEUR, SUPERIEUR, INFERIEUR_OU_EGAL, SUPERIEUR_OU_EGAL, SI, ET, OU, NON, SINON, TANTQUE, TYPE, VRAI, FAUX, LIRE, RETOURNER, PARENTHESE_OUVRANTE, PARENTHESE_FERMANTE, ACCOLADE_OUVRANTE, ACCOLADE_FERMANTE, ECRIRE, VIRGULE, POINT_VIRGULE, ENTIER, IDENTIFIANT};
+char *str_token[] = {"+", "-", "*", "/", "%", "=", "!=", "<", ">", "<=", ">=", "si", "et", "ou", "non", "sinon", "tantque", "booleen", "Vrai", "Faux", "lire", "(", ")", "{", "}", "ecrire", ",", ";", "ENTIER", "IDENTIFIANT"};
 
-int nbMotsClefs = 5;
+
+int nbMotsClefs = 30;
 
 void nom_token( int token, char *nom, char *valeur ) {   
 
