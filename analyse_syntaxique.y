@@ -60,10 +60,12 @@ n_programme* arbre_abstrait;
 
 
 
+
+
 %%
 
 
-// Instructions
+// Grammaire de base jusqu'a écrire
 
 
 prog: listeInstructions {
@@ -89,24 +91,30 @@ ecrire: ECRIRE PARENTHESE_OUVRANTE expr PARENTHESE_FERMANTE POINT_VIRGULE {
 	$$ =creer_n_ecrire($3);
 }
 
-// Expression
+// Facteur
 
-expr: expr PLUS expr{
-	$$ =creer_n_operation('+', $1, $3);
-}
-
-expr: expr FOIS expr{
-	$$ =creer_n_operation('*', $1 , $3);
-}
-
-expr: PARENTHESE_OUVRANTE expr PARENTHESE_FERMANTE {
-	$$ =$2 ;
-}
-
-expr: ENTIER {
+facteur: ENTIER {
 	$$ = creer_n_entier($1);
 }
 
+facteur: PARENTHESE_OUVRANTE expr PARENTHESE_FERMANTE {
+	$$ =$2 ;
+}
+
+
+// Expression
+
+expr: expr PLUS facteur{
+	$$ =creer_n_operation('+', $1, $3);
+}
+
+expr: expr FOIS facteur{
+	$$ =creer_n_operation('*', $1 , $3);
+}
+
+expr: facteur {
+	$$ = $1;
+}
 
 
 // Erreur

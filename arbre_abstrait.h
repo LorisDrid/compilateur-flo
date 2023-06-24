@@ -8,12 +8,25 @@
 */
 
 
+// Structures
+
 typedef struct n_programme n_programme; /* Noeud du type programme */
 typedef struct n_l_instructions n_l_instructions; /* Noeud du type liste d'instructions */
 typedef struct n_instruction n_instruction; /* Noeud du type liste instruction */
 typedef struct n_ecrire n_ecrire; /* Noeud du type instruction ecrire */
 typedef struct n_exp n_exp; /* Noeud du type expression (arithmétique) */
 typedef struct n_operation n_operation; /* Noeud du type operation (arithmétique) */
+
+typedef struct n_facteur n_facteur; /* Noeud du type facteur */
+
+
+
+
+
+
+
+
+
 
 struct n_programme{   // pour le moment un programme est juste une liste d'instructions. Il faudra ajouter une liste de définitions de fonctions.
 	n_l_instructions* instructions;	
@@ -45,12 +58,17 @@ struct n_operation{
   n_exp* exp2;
 };
 
+
+// Affichage
+
 void afficher_n_programme(n_programme* prog,int indent);
 void afficher_n_l_instructions(n_l_instructions* instructions ,int indent);
 void afficher_n_instruction(n_instruction* instruction ,int indent);
 void afficher_n_ecrire(n_ecrire* ecrire,int indent);
 void afficher_n_exp(n_exp* exp ,int indent);
 void afficher_n_operation(n_operation* operation ,int indent);
+
+// ----------------------
 
 n_programme* creer_n_programme(n_l_instructions* instructions);
 n_l_instructions* creer_n_l_instructions(n_instruction* instruction ,n_l_instructions* instructions);
