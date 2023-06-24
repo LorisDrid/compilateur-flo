@@ -61,7 +61,7 @@ extern int yydebug;
     POINT_VIRGULE = 262,           /* POINT_VIRGULE  */
     ENTIER = 263,                  /* ENTIER  */
     ECRIRE = 264,                  /* ECRIRE  */
-    DIVISER = 265,                 /* DIVISER  */
+    DIVISION = 265,                /* DIVISION  */
     MOINS = 266,                   /* MOINS  */
     EGAL = 267,                    /* EGAL  */
     DIFFERENT = 268,               /* DIFFERENT  */

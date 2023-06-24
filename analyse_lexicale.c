@@ -850,7 +850,7 @@ YY_RULE_SETUP
 case 6:
 YY_RULE_SETUP
 #line 25 "analyse_lexicale.l"
-{ return DIVISER;             }
+{ return DIVISION;             }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
@@ -1998,7 +1998,7 @@ int yywrap(){
  * Fonction auxiliaire qui donne le nom des différents tokens
  ******************************************************************************/
 
-int token_fermes[] = {PLUS, MOINS, FOIS, DIVISER, MODULO, EGAL, DIFFERENT, INFERIEUR, SUPERIEUR, INFERIEUR_OU_EGAL, SUPERIEUR_OU_EGAL, SI, ET, OU, NON, SINON, TANTQUE, TYPE, VRAI, FAUX, LIRE, RETOURNER, PARENTHESE_OUVRANTE, PARENTHESE_FERMANTE, ACCOLADE_OUVRANTE, ACCOLADE_FERMANTE, ECRIRE, VIRGULE, POINT_VIRGULE, ENTIER, IDENTIFIANT};
+int token_fermes[] = {PLUS, MOINS, FOIS, DIVISION, MODULO, EGAL, DIFFERENT, INFERIEUR, SUPERIEUR, INFERIEUR_OU_EGAL, SUPERIEUR_OU_EGAL, SI, ET, OU, NON, SINON, TANTQUE, TYPE, VRAI, FAUX, LIRE, RETOURNER, PARENTHESE_OUVRANTE, PARENTHESE_FERMANTE, ACCOLADE_OUVRANTE, ACCOLADE_FERMANTE, ECRIRE, VIRGULE, POINT_VIRGULE, ENTIER, IDENTIFIANT};
 char *str_token[] = {"+", "-", "*", "/", "%", "=", "!=", "<", ">", "<=", ">=", "si", "et", "ou", "non", "sinon", "tantque", "booleen", "Vrai", "Faux", "lire", "(", ")", "{", "}", "ecrire", ",", ";", "ENTIER", "IDENTIFIANT"};
 
 

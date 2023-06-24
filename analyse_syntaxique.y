@@ -36,7 +36,7 @@ n_programme* arbre_abstrait;
 %token FIN 0
 
 //Opérations arithmétiques
-%token DIVISER
+%token DIVISION
 %token MOINS
 %token EGAL
 %token DIFFERENT
@@ -82,6 +82,7 @@ n_programme* arbre_abstrait;
 
 %%
 
+//	Partie 1
 
 // Grammaire de base jusqu'a écrire
 
@@ -109,10 +110,18 @@ ecrire: ECRIRE PARENTHESE_OUVRANTE expr PARENTHESE_FERMANTE POINT_VIRGULE {
 	$$ =creer_n_ecrire($3);
 }
 
+
+//	Partie 2 : Opérations
+
+
 // Facteur
 
 facteur: ENTIER {
 	$$ = creer_n_entier($1);
+}
+
+facteur: MOINS ENTIER {
+	$$ = creer_n_operation('-',$2, NULL);
 }
 
 facteur: PARENTHESE_OUVRANTE expr PARENTHESE_FERMANTE {
@@ -128,6 +137,14 @@ produit: facteur {
 produit: produit FOIS facteur{
 	$$ = creer_n_operation('*', $1 , $3);
 }
+produit: produit DIVISION facteur{
+	$$ = creer_n_operation('/', $1, $3);
+	}
+	
+produit: produit MODULO facteur{
+	$$ = creer_n_operation('/', $1, $3);
+	}
+
 
 // Expression
 
