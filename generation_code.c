@@ -82,11 +82,21 @@ void nasm_operation(n_operation* n){
   nasm_exp(n->exp2);
   nasm_commande("pop", "ebx", NULL, NULL, "depile la seconde operande dans ebx");
   nasm_commande("pop", "eax", NULL, NULL, "depile la permière operande dans eax");
-  if (n->type_operation == '+'){
-      nasm_commande("add", "eax", "ebx", NULL, "effectue l'opération");
+
+  if (n->type_operation == '+') {
+    nasm_commande("add", "eax", "ebx", NULL, "effectue l'addition");
+  } else if (n->type_operation == '*') {
+    nasm_commande("imul", "eax", "ebx", NULL, "effectue la multiplication");
+  } else if (n->type_operation == '-') {
+    nasm_commande("sub", "eax", "ebx", NULL, "effectue la soustraction");
+  } else if (n->type_operation == '/') {
+    nasm_commande("cdq", NULL, NULL, NULL, "extension de signe de eax à edx:eax pour la division");
+    nasm_commande("idiv", "ebx", NULL, NULL, "effectue la division entière");
+  } else if (n->type_operation == '%') {
+    nasm_commande("cdq", NULL, NULL, NULL, "extension de signe de eax à edx:eax pour la division");
+    nasm_commande("idiv", "ebx", NULL, NULL, "effectue la division entière");
+    nasm_commande("mov", "eax", "edx", NULL, "place le reste dans eax (opération modulo)");
   }
-  else if(n->type_operation == '*'){
-    nasm_commande("imul", "ebx", NULL, NULL, "effectue l'opération");
-  }
-  nasm_commande("push",  "eax" , NULL, NULL, "empile le résultat");  
+
+  nasm_commande("push", "eax", NULL, NULL, "empile le résultat");  
 }
