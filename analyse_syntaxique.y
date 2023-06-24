@@ -38,12 +38,28 @@ n_programme* arbre_abstrait;
 //Opérations arithmétiques
 %token DIVISER
 %token MOINS
-%token EQUAL
+%token EGAL
 %token DIFFERENT
 %token INFERIEUR
 %token SUPERIEUR
-%token SUPERIEUR_OU_EQUAL
-%token INFERIEUR_OU_EQUAL
+%token SUPERIEUR_OU_EGAL
+%token INFERIEUR_OU_EGAL
+
+//Mots clés et symboles spécifiques
+%token SI
+%token SINON
+%token VRAI
+%token FAUX
+%token TANTQUE
+%token OU
+%token NON
+%token LIRE
+%token MODULO
+%token VIRGULE
+%token ACCOLADE_OUVRANTE
+%token ACCOLADE_FERMANTE
+%token ET
+%token RETOURNER
 
 
 //booléen ou entier 
@@ -57,6 +73,8 @@ n_programme* arbre_abstrait;
 %type <inst> instruction
 %type <inst> ecrire
 %type <exp> expr 
+%type <exp> facteur
+%type <exp> produit
 
 
 
@@ -101,18 +119,24 @@ facteur: PARENTHESE_OUVRANTE expr PARENTHESE_FERMANTE {
 	$$ =$2 ;
 }
 
+// Produit
+
+produit: facteur {
+	$$ = $1;
+}
+
+produit: produit FOIS facteur{
+	$$ = creer_n_operation('*', $1 , $3);
+}
 
 // Expression
 
-expr: expr PLUS facteur{
+expr: expr PLUS produit{
 	$$ =creer_n_operation('+', $1, $3);
 }
 
-expr: expr FOIS facteur{
-	$$ =creer_n_operation('*', $1 , $3);
-}
 
-expr: facteur {
+expr: produit {
 	$$ = $1;
 }
 

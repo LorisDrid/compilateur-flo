@@ -51,7 +51,7 @@ espace               [ \t\r\n]
 ","                  { return VIRGULE;             }
 ";"                  { return POINT_VIRGULE;       }
 {entier}             { yylval.entier=atoi(yytext); return ENTIER;}
-{lettre}{alphanum}*  { yylval.identifiant=strdup(yytext);  return IDENTIFIANT;}
+{lettre}{alphanum}*  { return IDENTIFIANT;         }
 <<EOF>>              { return FIN; }  /* Fin de fichier */
 .                    {                                /* Erreur, autre caractètre quelconque */
                        fprintf( stderr, "Ligne %d: caractère invalide: %s\n", yylineno,yytext ); \

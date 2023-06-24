@@ -17,7 +17,7 @@ typedef struct n_ecrire n_ecrire; /* Noeud du type instruction ecrire */
 typedef struct n_exp n_exp; /* Noeud du type expression (arithmétique) */
 typedef struct n_operation n_operation; /* Noeud du type operation (arithmétique) */
 
-typedef struct n_facteur n_facteur; /* Noeud du type facteur */
+typedef struct n_produit n_produit; /* Noeud du type produit */
 
 
 

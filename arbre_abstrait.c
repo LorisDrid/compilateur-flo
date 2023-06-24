@@ -9,6 +9,7 @@
   * l -> liste
 */
 
+//Partie 1 : Affichage
 
 //affiche l'entier avec sa valeur après un certain nombres d'espaces et un retour à la ligne
 void afficher(char* s,int indent){
@@ -88,12 +89,18 @@ void afficher_n_operation(n_operation* operation ,int indent){
 		afficher("</operation>",indent);
 }
 
+//Partie 2 : Créer les noeuds
+
+
+// Crée un nœud de programme
 n_programme* creer_n_programme(n_l_instructions* instructions){
   n_programme* n = malloc(sizeof(n_programme));
   n->instructions = instructions;
   return n;
 }
 
+
+// Crée un nœud de liste d'instructions
 n_l_instructions* creer_n_l_instructions(n_instruction* instruction ,n_l_instructions* instructions){
   n_l_instructions* n = malloc(sizeof(n_l_instructions));
   n->instruction = instruction;
@@ -101,6 +108,8 @@ n_l_instructions* creer_n_l_instructions(n_instruction* instruction ,n_l_instruc
   return n;
 }
 
+
+// Crée un nœud d'instruction d'écrire
 n_instruction* creer_n_ecrire(n_exp* exp){
   n_instruction* n = malloc(sizeof(n_instruction));
   n->type_instruction = i_ecrire;
