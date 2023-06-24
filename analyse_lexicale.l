@@ -90,6 +90,10 @@ void nom_token( int token, char *nom, char *valeur ) {
     strcpy( nom, "identifiant" );  
     strcpy( valeur, yytext );      
   }
+  else if( token == TYPE ) {
+    strcpy( nom, "type" );  
+    strcpy( valeur, yytext );      
+  }
 }
 
 /*******************************************************************************
