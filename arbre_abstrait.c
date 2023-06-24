@@ -65,6 +65,9 @@ void afficher_n_instruction(n_instruction* instruction ,int indent){
 		afficher_n_exp(instruction->u.exp,indent+1);
 		afficher("</ecrire>",indent);
 	}
+	if(instruction->type_instruction == i_lire){
+		afficher("<lire>",indent);
+	}
 }
 
 

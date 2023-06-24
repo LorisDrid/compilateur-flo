@@ -25,7 +25,7 @@ struct n_l_instructions{
 };
 
 struct n_instruction{
-  enum { i_ecrire } type_instruction; // pour le moment une instruction peut-être uniquement de type écrire. Il faudra ajouter affectation, exécution de fonction, si,sinon, etc...
+  enum { i_ecrire, i_lire } type_instruction; // pour le moment une instruction peut-être uniquement de type écrire. Il faudra ajouter affectation, exécution de fonction, si,sinon, etc...
   union{ 
     n_exp* exp; // pour ecrire(exp);
   }u;
