@@ -24,6 +24,8 @@ n_programme* arbre_abstrait;
 %define parse.lac full
 //Symboles terminaux qui seront fournis par yylex(), ordre non important
 
+
+//Ce qu'on a de base
 %token IDENTIFIANT
 %token PLUS
 %token FOIS
@@ -34,13 +36,36 @@ n_programme* arbre_abstrait;
 %token ECRIRE
 %token FIN 0
 
+//Opérations arithmétiques
+%token DIVISER
+%token MOINS
+%token EQUAL
+%token DIFFERENT
+%token INFERIEUR
+%token SUPERIEUR
+%token SUPERIEUR_OU_EQUAL
+%token INFERIEUR_OU_EQUAL
+
+
+//booléen ou entier 
+%token <type> TYPE
+//identifiant
+%token <identifiant> IDENTIFIANT
+
+//Types de noeuds de l'arbre abstrait
 %type <prog> prog
 %type <l_inst> listeInstructions
 %type <inst> instruction
 %type <inst> ecrire
 %type <exp> expr 
 
+
+
 %%
+
+
+// Partie 1 :
+
 
 prog: listeInstructions {
 arbre_abstrait =creer_n_programme($1);
