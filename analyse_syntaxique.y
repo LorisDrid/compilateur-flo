@@ -72,9 +72,15 @@ n_programme* arbre_abstrait;
 %type <l_inst> listeInstructions
 %type <inst> instruction
 %type <inst> ecrire
+%type <inst> lire
 %type <exp> expr 
 %type <exp> facteur
 %type <exp> produit
+%type <variable> declaration
+%type <variable> affectation
+%type <variable> declarationAffectation
+%type <variable> variable
+
 
 
 
@@ -95,11 +101,15 @@ listeInstructions: instruction {
 $$ =creer_n_l_instructions($1 ,NULL);
 } 
 
-listeInstructions: instruction listeInstructions {
-$$ =creer_n_l_instructions($1 ,$2);
+listeInstructions: listeInstructions instruction {
+$$ =creer_n_l_instructions($2 ,$1);
 } 
 
-instruction: ecrire {
+
+
+// Ecrire
+
+instruction: ecrire POINT_VIRGULE {
 	$$ =$1;
 }
 
@@ -120,12 +130,61 @@ facteur: ENTIER {
 	$$ = creer_n_entier($1);
 }
 
-facteur: MOINS ENTIER {
+facteur: MOINS facteur {
 	$$ = creer_n_operation('-',$2, NULL);
 }
 
 facteur: PARENTHESE_OUVRANTE expr PARENTHESE_FERMANTE {
 	$$ =$2 ;
+}
+
+facteur: variable {
+	$$ = n_facteur_variable($1);
+}
+
+facteur: retourFonction{
+	$$ = n_fonction_retour($1);
+}
+
+facteur: lire PARENTHESE_OUVRANTE PARENTHESE_FERMANTE {
+	$$ = n_lire();
+}
+
+// Variable
+
+variable: ENTIER {
+	$$ = creer_n_entier($1);
+}
+
+
+// Lire
+
+lire: LIRE PARENTHESE_OUVRANTE PARENTHESE_FERMANTE {
+    $$ = creer_n_lire();
+}
+
+// Retour fonction
+
+retourFonction: IDENTIFIANT PARENTHESE_OUVRANTE PARENTHESE_FERMANTE {
+	$$ = retour_fonction($1);
+}
+
+retourFonction: IDENTIFIANT PARENTHESE_OUVRANTE argumentsListe PARENTHESE_FERMANTE {
+	$$ = retour_fonction_arguments($1,$3);
+}
+
+// Arguments
+
+argumentsListe: argument VIRGULE argumentsListe {
+	$$ = creer_declaration_arguments($1);
+}
+
+argument: ENTIER {
+	$$ = creer_n_entier($1);
+}
+
+argument: variable {
+	$$ = $1;
 }
 
 // Produit
@@ -157,6 +216,9 @@ expr: produit {
 	$$ = $1;
 }
 
+expr: expr MOINS produit{
+	$$ =creer_n_operation('-', $1, $3);
+}
 
 // Erreur
 

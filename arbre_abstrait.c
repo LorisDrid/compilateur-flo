@@ -117,6 +117,19 @@ n_instruction* creer_n_ecrire(n_exp* exp){
   return n;
 }
 
+// Crée un nœud d'instruction de lire
+n_instruction* creer_n_lire() {
+    n_instruction* n = malloc(sizeof(n_instruction));
+    n->type_instruction = i_lire;
+    return n;
+}
+
+
+//Partie 3 : Expressions
+
+
+
+// Crée un nœud d'expression entière
 n_exp* creer_n_entier(int valeur){
   n_exp* n = malloc(sizeof(n_exp));
   n->type_exp = i_entier;
@@ -124,6 +137,7 @@ n_exp* creer_n_entier(int valeur){
   return n;
 }
 
+// Crée un nœud d'expression d'opération
 n_exp* creer_n_operation(char type_operation,n_exp* exp1,n_exp* exp2){
   n_exp* n = malloc(sizeof(n_exp));
   n_operation* n_op = malloc(sizeof(n_operation));
