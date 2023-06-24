@@ -65,6 +65,12 @@ void nasm_instruction(n_instruction* n){
 		nasm_commande("pop", "eax", NULL, NULL, NULL); //on dépile la valeur d'expression sur eax
 		nasm_commande("call", "iprintLF", NULL, NULL, NULL); //on envoie la valeur d'eax sur la sortie standard
 	}
+  if(n->type_instruction == i_lire){
+    nasm_commande("mov", "eax", "sinput", NULL, "charge l’adresse sinput");
+    nasm_commande("call", "readline", NULL, NULL, "appelle readline de io.asm");
+    nasm_commande("call", "atoi", NULL, NULL, "appelle atoi de io.asm");
+    nasm_commande("push", "eax", NULL, NULL, "empile eax");
+	}
 }
 
 void nasm_exp(n_exp* n){
