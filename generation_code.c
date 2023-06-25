@@ -47,6 +47,7 @@ void nasm_prog(n_programme *n) {
   nasm_liste_instructions(n->instructions);
   //pour quitter le programme
   nasm_commande("mov", "eax", "1" , NULL, "1 est le code de SYS_EXIT");
+  nasm_commande("mov", "ebx", "0" , NULL, "mettre 0 dans ebx");
   nasm_commande("int", "0x80", NULL, NULL, "exit");
 }
 

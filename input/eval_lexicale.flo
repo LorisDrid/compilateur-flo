@@ -1,6 +1,6 @@
 entier max(entier entier1, entier entier2,entier entier3){
 	entier res = 0;
-	si (entier1 >= entier2 et entier1 >= entier3 ){
+	si (entier1 >= entier2 et entier1 > entier3 ){
 		res = entier1;
 	} sinon si ( non entier1 < entier3  ){
 		res = entier2;
@@ -13,8 +13,10 @@ entier max(entier entier1, entier entier2,entier entier3){
 }
 
 booleen continuer = Vrai;
-booleen arreter = Faux;
-tantQue(continuer ou non arreter){
+tantque(continuer){
 	entier a = max(lire(),5-12+23,47/13*6);
-	ecrire(a % 100);
+	si(a % 10 != 0){
+		ecrire(a);
+		continuer = Faux;
+	}
 }
